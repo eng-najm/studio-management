@@ -11,6 +11,7 @@ public class Employee extends Person {
     private int salary;
     private Role role;
     private ArrayList<Skill> skills;
+    private ArrayList<Attendance> attendances;
 
     public Employee(int id, String firstName, String meddilName, String lastName, char sex, String phone,
             String address, Date hireDate, int salary, Role role) {
@@ -58,5 +59,11 @@ public class Employee extends Person {
 
     public ArrayList<Skill> getSkills() {
         return skills;
+    }
+
+    public void addAttendance(Attendance attendance) {
+        attendances.add(attendance);
+        attendance.addEmployee(this);
+
     }
 }
