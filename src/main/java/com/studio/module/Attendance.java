@@ -17,14 +17,15 @@ public class Attendance {
     private Date checkOut;
     private Date date;
     private AttendanceStatus status;
-    private Employee employee;
+    private int employeeId;
 
-    public Attendance(int id, Date checkIn, Date checkOut, Date date, AttendanceStatus status) {
+    public Attendance(int id, int employeeId, Date checkIn, Date checkOut, Date date, AttendanceStatus status) {
         this.id = id;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
         this.date = date;
         this.status = status;
+        this.employeeId = employeeId;
     }
 
     public int getId() {
@@ -67,12 +68,12 @@ public class Attendance {
         this.status = status;
     }
 
-    public void addEmployee(Employee employee) {
-        this.employee = employee;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
 }
