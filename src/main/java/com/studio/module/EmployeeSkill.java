@@ -1,11 +1,11 @@
 package com.studio.module;
 
-public class Employee_skill {
+public class EmployeeSkill {
 
 private int employeeId;
 private int skillId;    
 private int years;
-public Employee_skill(int employeeId, int skillId, int years) {
+public EmployeeSkill(int employeeId, int skillId, int years) {
     this.employeeId = employeeId;
     this.skillId = skillId;
     this.years = years;
