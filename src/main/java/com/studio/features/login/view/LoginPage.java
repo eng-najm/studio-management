@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.studio.core.AppStrings;
@@ -14,16 +13,13 @@ import com.studio.core.shared_widgets.CustomButton;
 import com.studio.core.shared_widgets.CustomFiled;
 import com.studio.core.shared_widgets.CustomLable;
 
-public class LoginPage extends JFrame {
+public class LoginPage extends JPanel {
     private CustomFiled usernameField = new CustomFiled();
     private CustomFiled passwordField = new CustomFiled();
     private CustomButton submitButton = new CustomButton(AppStrings.login);
 
-    LoginPage() {
+   public LoginPage() {
         this.setSize(500, 500);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setResizable(false);
-        this.setLocationRelativeTo(null);
 
         JPanel mainPnel = new JPanel();
         mainPnel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
