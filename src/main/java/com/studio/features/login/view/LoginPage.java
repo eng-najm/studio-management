@@ -9,16 +9,16 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import com.studio.core.AppStrings;
-import com.studio.core.shared_widgets.CustomButton;
-import com.studio.core.shared_widgets.CustomFiled;
-import com.studio.core.shared_widgets.CustomLable;
+import com.studio.core.shared_widgets.AppButton;
+import com.studio.core.shared_widgets.AppFiled;
+import com.studio.core.shared_widgets.AppLable;
 
 public class LoginPage extends JPanel {
-    private CustomFiled usernameField = new CustomFiled();
-    private CustomFiled passwordField = new CustomFiled();
-    private CustomButton submitButton = new CustomButton(AppStrings.login);
+    private AppFiled usernameField = new AppFiled();
+    private AppFiled passwordField = new AppFiled();
+    private AppButton submitButton = new AppButton(AppStrings.login);
 
-   public LoginPage() {
+    public LoginPage() {
         this.setSize(500, 500);
 
         JPanel mainPnel = new JPanel();
@@ -31,14 +31,14 @@ public class LoginPage extends JPanel {
 
         submitButton.setPreferredSize(new Dimension(150, 40));
         submitButton.setMaximumSize(new Dimension(150, 40));
-        CustomLable userLabel = new CustomLable(AppStrings.username);
+        AppLable userLabel = new AppLable(AppStrings.username);
         userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPnel.add(userLabel);
         mainPnel.add(Box.createRigidArea(new Dimension(0, 5)));
         mainPnel.add(usernameField);
 
         mainPnel.add(Box.createRigidArea(new Dimension(0, 15)));
-        CustomLable pasLable = new CustomLable(AppStrings.password);
+        AppLable pasLable = new AppLable(AppStrings.password);
         pasLable.setAlignmentX(Component.CENTER_ALIGNMENT);
         mainPnel.add(pasLable);
         mainPnel.add(Box.createRigidArea(new Dimension(0, 5)));

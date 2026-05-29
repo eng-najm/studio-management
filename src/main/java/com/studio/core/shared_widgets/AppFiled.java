@@ -3,12 +3,11 @@ package com.studio.core.shared_widgets;
 import java.awt.Dimension;
 import java.awt.Font;
 
-import javax.swing.JButton;
+import javax.swing.JTextField;
 
-public class CustomButton extends JButton {
-    public CustomButton(String text) {
-        this.setText(text);
+public class AppFiled extends JTextField {
 
+    public AppFiled() {
         Dimension d = new Dimension(400, 45);
         this.setPreferredSize(d);
         this.setMinimumSize(d);
