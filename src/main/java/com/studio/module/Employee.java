@@ -3,7 +3,7 @@ package com.studio.module;
 import java.util.Date;
 
 enum Role {
-    MANAGER, PHOTOGRAPHER, RECEPTIONIST
+    MANAGER, PHOTOGRAPHER, RECEPTIONIST, LASER_ENGRAVER, PRINT_OPERATOR
 }
 
 public class Employee extends Person {
