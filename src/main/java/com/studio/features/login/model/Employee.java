@@ -1,6 +1,10 @@
-package com.studio.module;
+package com.studio.features.login.model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+
+import com.studio.module.Person;
 
 enum Role {
     MANAGER, PHOTOGRAPHER, RECEPTIONIST, LASER_ENGRAVER, PRINT_OPERATOR
@@ -60,6 +64,22 @@ public class Employee extends Person {
 
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
+    }
+
+    public static Employee fromResult(ResultSet resultSet) throws SQLException {
+        return new Employee(
+                resultSet.getInt("PERSON_ID"),
+                resultSet.getString("FIRST_NAME"),
+                resultSet.getString("MIDDLE_NAME"),
+                resultSet.getString("LAST_NAME"),
+                resultSet.getString("SEX").charAt(0),
+                resultSet.getString("PHONE"),
+                resultSet.getString("ADDRESS"),
+                resultSet.getDate("HIRE_DATE"),
+                resultSet.getInt("SALARY"),
+                Role.valueOf(resultSet.getString("ROLE")),
+                resultSet.getString("USER_NAME"),
+                resultSet.getString("USER_PASSWORD"));
     }
 
 }

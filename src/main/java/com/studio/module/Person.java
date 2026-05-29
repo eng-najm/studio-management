@@ -2,7 +2,7 @@ package com.studio.module;
 
 import java.util.Date;
 
-abstract class Person {
+public abstract class Person {
     private int id;
     private String firstName;
     private String meddilName;
