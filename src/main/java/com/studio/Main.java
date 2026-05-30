@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import com.studio.Main;
+import com.studio.core.constants.AppRoutes;
 import com.studio.features.login.view.LoginPage;
 
 public class Main extends JFrame {
@@ -22,11 +23,11 @@ public class Main extends JFrame {
 
         LoginPage loginPanel = new LoginPage();
 
-        container.add(loginPanel, "login");
+        container.add(loginPanel, AppRoutes.LOGIN);
 
         add(container);
 
-        cardLayout.show(container, "login");
+        cardLayout.show(container, AppRoutes.LOGIN);
     }
 
     public static void main(String[] args) {
