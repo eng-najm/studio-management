@@ -12,15 +12,16 @@ import com.studio.core.AppStrings;
 import com.studio.core.shared_widgets.AppButton;
 import com.studio.core.shared_widgets.AppFiled;
 import com.studio.core.shared_widgets.AppLable;
+import com.studio.features.login.controller.LoginController;
 
 public class LoginPage extends JPanel {
-    private AppFiled usernameField = new AppFiled();
-    private AppFiled passwordField = new AppFiled();
-    private AppButton submitButton = new AppButton(AppStrings.login);
+    public AppFiled usernameField = new AppFiled();
+    public AppFiled passwordField = new AppFiled();
+    public AppButton submitButton = new AppButton(AppStrings.login);
 
     public LoginPage() {
+        new LoginController(this);
         this.setSize(500, 500);
-
         JPanel mainPnel = new JPanel();
         mainPnel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
         mainPnel.setLayout(new BoxLayout(mainPnel, BoxLayout.Y_AXIS));
