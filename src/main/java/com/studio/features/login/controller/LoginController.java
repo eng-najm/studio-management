@@ -6,7 +6,7 @@ import com.studio.Main;
 import com.studio.core.Either;
 import com.studio.core.constants.AppRoutes;
 import com.studio.features.login.LoginDAO;
-import com.studio.features.login.model.Employee;
+import com.studio.features.login.model.User;
 import com.studio.features.login.view.LoginPage;
 
 public class LoginController {
@@ -26,7 +26,7 @@ public class LoginController {
     }
 
     void login() {
-        Either<Employee, Exception> result = loginDAO.getEmployee(loginPage.usernameField.getText(),
+        Either<User, Exception> result = loginDAO.getEmployee(loginPage.usernameField.getText(),
                 loginPage.passwordField.getText());
         if (result.isLeft()) {
             main.goTo(AppRoutes.DASHBOARD);
