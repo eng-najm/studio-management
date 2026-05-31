@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 
 import com.studio.Main;
 import com.studio.core.constants.AppRoutes;
+import com.studio.features.dashboard.view.DashboardPage;
 import com.studio.features.login.view.LoginPage;
 
 public class Main extends JFrame {
@@ -22,12 +23,14 @@ public class Main extends JFrame {
         setLocationRelativeTo(null);
 
         LoginPage loginPanel = new LoginPage();
+        DashboardPage dashboardPage = new DashboardPage();
 
         container.add(loginPanel, AppRoutes.LOGIN);
+        container.add(dashboardPage, AppRoutes.DASHBOARD);
 
         add(container);
 
-        cardLayout.show(container, AppRoutes.LOGIN);
+        cardLayout.show(container, AppRoutes.DASHBOARD);
     }
 
     public static void main(String[] args) {
