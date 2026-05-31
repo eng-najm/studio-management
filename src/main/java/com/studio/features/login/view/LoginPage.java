@@ -12,7 +12,6 @@ import com.studio.core.constants.AppStrings;
 import com.studio.core.shared_widgets.AppButton;
 import com.studio.core.shared_widgets.AppFiled;
 import com.studio.core.shared_widgets.AppLable;
-import com.studio.features.login.controller.LoginController;
 
 public class LoginPage extends JPanel {
     public AppFiled usernameField = new AppFiled();
@@ -20,7 +19,6 @@ public class LoginPage extends JPanel {
     public AppButton submitButton = new AppButton(AppStrings.LOGIN);
 
     public LoginPage() {
-        new LoginController(this);
         this.setSize(500, 500);
         JPanel mainPnel = new JPanel();
         mainPnel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
@@ -52,7 +50,4 @@ public class LoginPage extends JPanel {
         this.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new LoginPage();
-    }
 }

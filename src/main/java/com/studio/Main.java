@@ -9,6 +9,7 @@ import javax.swing.SwingUtilities;
 import com.studio.Main;
 import com.studio.core.constants.AppRoutes;
 import com.studio.features.dashboard.view.DashboardPage;
+import com.studio.features.login.controller.LoginController;
 import com.studio.features.login.view.LoginPage;
 
 public class Main extends JFrame {
@@ -30,7 +31,12 @@ public class Main extends JFrame {
 
         add(container);
 
-        cardLayout.show(container, AppRoutes.DASHBOARD);
+        cardLayout.show(container, AppRoutes.LOGIN);
+        new LoginController(loginPanel, this);
+    }
+
+    public void goTo(String route) {
+        cardLayout.show(container, route);
     }
 
     public static void main(String[] args) {
