@@ -6,9 +6,6 @@ import java.util.Date;
 
 import com.studio.module.Person;
 
-enum Role {
-    MANAGER, PHOTOGRAPHER, RECEPTIONIST, LASER_ENGRAVER, PRINT_OPERATOR
-}
 
 public class EmployeeModel extends Person {
     private int salary;
@@ -42,8 +39,8 @@ public class EmployeeModel extends Person {
         this.salary = salary;
     }
 
-    public Role getRole() {
-        return role;
+    public String getRole() {
+        return role.toString();
     }
 
     public void setRole(Role role) {
