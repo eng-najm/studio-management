@@ -36,6 +36,7 @@ public class Main extends JFrame {
 
         cardLayout.show(container, AppRoutes.LOGIN);
         new LoginController(loginPanel, this);
+        pack();
     }
 
     public void goTo(String route) {
