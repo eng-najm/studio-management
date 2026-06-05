@@ -1,7 +1,6 @@
 package com.studio.features.employee_management.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import com.studio.core.shared_widgets.AppButton;
 import com.studio.core.shared_widgets.AppLable;
 import com.studio.features.dashboard.view.DashboardPage;
 import com.studio.features.employee_management.model.EmployeeModel;
@@ -26,7 +24,6 @@ public class EmployeePage extends JPanel {
     JTable table;
 
     DashboardPage route;
-    AppButton button = new AppButton("Edit");;
     TableActionListener listener;
 
     public interface TableActionListener {
@@ -34,10 +31,6 @@ public class EmployeePage extends JPanel {
     }
 
     public EmployeePage() {
-
-        button.setOpaque(true);
-        button.setBackground(new Color(70, 130, 180));
-        button.setForeground(Color.WHITE);
 
         this.setLayout(new BorderLayout());
         JPanel taplePanel = new JPanel(new BorderLayout());
@@ -61,13 +54,8 @@ public class EmployeePage extends JPanel {
     public void populateEmployeeList(List<EmployeeModel> employees) {
         tableModel = new EmployeeTable(employees);
         table.setModel(tableModel);
-
         table.revalidate();
         table.repaint();
-    }
-
-    public AppButton getButton() {
-        return button;
     }
 
     public JTable getTable() {
