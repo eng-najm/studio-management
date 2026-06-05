@@ -34,29 +34,28 @@ public class EmployeeTable extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         EmployeeModel employee = employees.get(rowIndex);
         switch (columnIndex) {
+
             case 0:
-                return "Edit";
-            case 1:
                 return employee.getId();
-            case 2:
+            case 1:
                 return employee.getFirstName();
-            case 3:
+            case 2:
                 return employee.getMeddilName();
-            case 4:
+            case 3:
                 return employee.getLastName();
-            case 5:
+            case 4:
                 return employee.getSex();
-            case 6:
+            case 5:
                 return employee.getPhone();
-            case 7:
+            case 6:
                 return employee.getAddress();
-            case 8:
+            case 7:
                 return employee.getRole();
+            case 8:
+                return employee.getSalary();
             case 9:
-                return employee.getSalary() + " $";
-            case 10:
                 return employee.getUserName();
-            case 11:
+            case 10:
                 return employee.getUserPassword();
             default:
                 return null;
@@ -65,7 +64,7 @@ public class EmployeeTable extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex == 0;
+        return false;
     }
 
     public EmployeeModel getEmployeeAt(int rowIndex) {
