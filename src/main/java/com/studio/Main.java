@@ -13,7 +13,6 @@ import com.formdev.flatlaf.FlatLightLaf;
 import com.studio.Main;
 import com.studio.core.constants.AppRoutes;
 import com.studio.features.dashboard.view.DashboardPage;
-import com.studio.features.employee_management.view.EmployeePage;
 import com.studio.features.login.controller.LoginController;
 import com.studio.features.login.view.LoginPage;
 
@@ -38,12 +37,10 @@ public class Main extends JFrame {
         setLocationRelativeTo(null);
 
         LoginPage loginPanel = new LoginPage();
-        EmployeePage employeePage = new EmployeePage();
         DashboardPage dashboardPage = new DashboardPage();
 
         container.add(loginPanel, AppRoutes.LOGIN);
         container.add(dashboardPage, AppRoutes.DASHBOARD);
-        container.add(employeePage, AppRoutes.EMPLOYEE_MANAGEMENT);
 
         add(container);
 
