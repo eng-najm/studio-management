@@ -13,11 +13,13 @@ public class NavigationController {
 
     public NavigationController(DashboardPage dashboardPage) {
         this.dashboardPage = dashboardPage;
-        init();
+
     }
 
     public void init() {
         addEditButtonListener();
+        dashboardPage.getEmpButton().addActionListener(e -> goTo(AppRoutes.EMPLOYEE_MANAGEMENT));
+        dashboardPage.getEditEmployeePage().getBackButton().addActionListener(e -> goTo(AppRoutes.EMPLOYEE_MANAGEMENT));
     }
 
     void goTo(String route) {

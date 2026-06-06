@@ -28,7 +28,7 @@ public class Main extends JFrame {
             Font newFont = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(25f);
             UIManager.put("defaultFont", newFont);
         } catch (Exception e) {
-            // TODO: handle exception
+
         }
 
         setTitle("App");

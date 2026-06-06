@@ -33,11 +33,10 @@ public class DashboardPage extends JPanel {
     EditEmployeePage editEmployeePage;
 
     public DashboardPage() {
+        NavigationController nav = new NavigationController(this);
         employeePage = new EmployeePage();
         editEmployeePage = new EditEmployeePage();
-        new EmployeeController(employeePage);
-        // تهيئة الـ NavigationController ليؤمّن الربط بين الـ dashboard وصفحات الموظفين
-        new NavigationController(this);
+        new EmployeeController(employeePage, editEmployeePage);
 
         this.setLayout(new BorderLayout());
         //
@@ -55,11 +54,12 @@ public class DashboardPage extends JPanel {
         items.add(orderButton);
 
         //
-        this.add(items, BorderLayout.WEST);
-        this.add(container, BorderLayout.CENTER);
         container.add(employeePage, AppRoutes.EMPLOYEE_MANAGEMENT);
         container.add(editEmployeePage, AppRoutes.EDITE_EMPLOYEE);
+        this.add(items, BorderLayout.WEST);
+        this.add(container, BorderLayout.CENTER);
 
+        nav.init();
     }
 
     public void goTo(String route) {
