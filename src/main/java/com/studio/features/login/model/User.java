@@ -3,10 +3,6 @@ package com.studio.features.login.model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-enum Role {
-    MANAGER, PHOTOGRAPHER, RECEPTIONIST, LASER_ENGRAVER, PRINT_OPERATOR
-}
-
 public class User {
     private String userName;
     private String userPassword;
