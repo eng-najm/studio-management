@@ -11,24 +11,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import com.studio.core.shared_widgets.AppLable;
-import com.studio.features.dashboard.view.DashboardPage;
 import com.studio.features.employee_management.model.EmployeeModel;
 
 public class EmployeePage extends JPanel {
     EmployeeTable tableModel;
-
-    public EmployeeTable getTableModel() {
-        return tableModel;
-    }
-
     JTable table;
-
-    DashboardPage route;
-    TableActionListener listener;
-
-    public interface TableActionListener {
-        void onButtonClick(int rowIndex);
-    }
 
     public EmployeePage() {
 
@@ -40,7 +27,7 @@ public class EmployeePage extends JPanel {
 
         table.setFont(new Font("", Font.PLAIN, 20));
         table.setRowHeight(35);
-        table.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
+        // table.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         JScrollPane scrollPane = new JScrollPane(table);
         taplePanel.add(scrollPane, BorderLayout.CENTER);
@@ -60,6 +47,10 @@ public class EmployeePage extends JPanel {
 
     public JTable getTable() {
         return table;
+    }
+
+    public EmployeeTable getTableModel() {
+        return tableModel;
     }
 
 }
