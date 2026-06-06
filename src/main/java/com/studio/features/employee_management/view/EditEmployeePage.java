@@ -17,22 +17,24 @@ import com.studio.core.shared_widgets.AppLable;
 import com.studio.features.employee_management.model.EmployeeModel;
 
 public class EditEmployeePage extends JPanel {
-    public AppFiled idField = new AppFiled();
-    public AppFiled firstNameField = new AppFiled();
-    public AppFiled middleNameField = new AppFiled();
-    public AppFiled lastNameField = new AppFiled();
-    public AppFiled phoneField = new AppFiled();
-    public AppFiled addressField = new AppFiled();
-    public AppFiled salaryField = new AppFiled();
-    public AppFiled userNameField = new AppFiled();
-    public AppFiled passwordField = new AppFiled();
+    AppFiled idField = new AppFiled();
+    AppFiled firstNameField = new AppFiled();
+    AppFiled middleNameField = new AppFiled();
+    AppFiled lastNameField = new AppFiled();
+    AppFiled phoneField = new AppFiled();
+    AppFiled addressField = new AppFiled();
+    AppFiled salaryField = new AppFiled();
+    AppFiled userNameField = new AppFiled();
+    AppFiled passwordField = new AppFiled();
+    private EmployeeModel currentData;
+    private AppButton applyChangeButton;
 
-    public AppButton applyChangeButton = new AppButton("Apply Changes");
-    public AppButton backButton = new AppButton("Back");
+    private AppButton backButton;
 
     public EditEmployeePage() {
         this.setLayout(new BorderLayout());
-
+        backButton = new AppButton("Back");
+        applyChangeButton = new AppButton("Apply Changes");
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
         formPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
@@ -70,6 +72,7 @@ public class EditEmployeePage extends JPanel {
     }
 
     public void setEmployeeData(EmployeeModel employee) {
+        this.currentData = employee;
         idField.setText(employee.getId() + "");
         firstNameField.setText(employee.getFirstName());
         middleNameField.setText(employee.getMeddilName());
@@ -79,5 +82,28 @@ public class EditEmployeePage extends JPanel {
         salaryField.setText(String.valueOf(employee.getSalary()));
         userNameField.setText(employee.getUserName());
         passwordField.setText(employee.getUserPassword());
+    }
+
+    public EmployeeModel getCurrentData() {
+        currentData.setId(Integer.parseInt(idField.getText()));
+        currentData.setId(Integer.parseInt(idField.getText()));
+        currentData.setFirstName(firstNameField.getText());
+        currentData.setMeddilName(middleNameField.getText());
+        currentData.setLastName(lastNameField.getText());
+        currentData.setPhone(phoneField.getText());
+        currentData.setAddress(addressField.getText());
+        currentData.setSalary(Integer.parseInt(salaryField.getText()));
+        currentData.setUserName(userNameField.getText());
+        currentData.setUserPassword(passwordField.getText());
+
+        return currentData;
+    }
+
+    public AppButton getApplyChangeButton() {
+        return applyChangeButton;
+    }
+
+    public AppButton getBackButton() {
+        return backButton;
     }
 }
