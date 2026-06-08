@@ -13,6 +13,9 @@ import com.studio.core.constants.AppRoutes;
 import com.studio.core.shared_widgets.AppButton;
 import com.studio.features.dashboard.model.DashItem;
 import com.studio.features.employee_management.controller.EmployeeController;
+import com.studio.features.customer.controller.CustomerController;
+import com.studio.features.customer.view.CustomerPage;
+import com.studio.features.customer.view.EditCustomerPage;
 import com.studio.features.dashboard.controller.NavigationController;
 import com.studio.features.employee_management.view.EditEmployeePage;
 import com.studio.features.employee_management.view.EmployeePage;
@@ -20,7 +23,7 @@ import com.studio.features.employee_management.view.EmployeePage;
 public class DashboardPage extends JPanel {
     DashItem[] dashItems = {
             new DashItem("Employee Management", "", AppRoutes.EMPLOYEE_MANAGEMENT),
-            new DashItem("Customer Management", "", ""),
+            new DashItem("Customer Management", "", AppRoutes.CUSTOMER_MANAGEMENT),
             new DashItem("Order Management", "", ""),
     };
     AppButton empButton;
@@ -31,12 +34,18 @@ public class DashboardPage extends JPanel {
     JPanel container = new JPanel(cardLayout);
     EmployeePage employeePage;
     EditEmployeePage editEmployeePage;
+    CustomerPage customerPage;
+    EditCustomerPage editCustomerPage;
 
     public DashboardPage() {
         NavigationController nav = new NavigationController(this);
         employeePage = new EmployeePage();
         editEmployeePage = new EditEmployeePage();
-        new EmployeeController(employeePage, editEmployeePage);
+        new EmployeeController(employeePage, editEmployeePage, this);
+        customerPage = new CustomerPage();
+        editCustomerPage = new EditCustomerPage();
+        new EmployeeController(employeePage, editEmployeePage, this);
+        new CustomerController(customerPage, editCustomerPage, this);
 
         this.setLayout(new BorderLayout());
         //
@@ -56,6 +65,8 @@ public class DashboardPage extends JPanel {
         //
         container.add(employeePage, AppRoutes.EMPLOYEE_MANAGEMENT);
         container.add(editEmployeePage, AppRoutes.EDITE_EMPLOYEE);
+        container.add(customerPage, AppRoutes.CUSTOMER_MANAGEMENT);
+        container.add(editCustomerPage, AppRoutes.EDIT_CUSTOMER);
         this.add(items, BorderLayout.WEST);
         this.add(container, BorderLayout.CENTER);
 
