@@ -14,5 +14,7 @@ public class AppRoutes {
     public final static String ORDER_MANAGEMENT = "ORDER_MANAGEMENT";
     public final static String ORDER_DETAIL = "ORDER_DETAIL";
     public final static String EDIT_ORDER = "EDIT_ORDER";
+    public final static String ATTENDANCE_MANAGEMENT = "ATTENDANCE_MANAGEMENT";
+    public final static String EDIT_ATTENDANCE = "EDIT_ATTENDANCE";
 
 }
