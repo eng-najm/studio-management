@@ -11,17 +11,21 @@ import com.studio.features.customer.CustomerDAO;
 import com.studio.features.customer.model.CustomerModel;
 import com.studio.features.employee_management.EmployeeDAO;
 import com.studio.features.employee_management.model.EmployeeModel;
+import com.studio.features.order.OrderDAO;
+import com.studio.features.order.model.OrderModel;
 
 public class ComboItemsProvider {
 
     private final CustomerDAO customerDAO;
     private final EmployeeDAO employeeDAO;
     private final CouponDAO couponDAO;
+    private final OrderDAO orderDAO;
 
     public ComboItemsProvider() {
         customerDAO = new CustomerDAO();
         employeeDAO = new EmployeeDAO();
         couponDAO = new CouponDAO();
+        orderDAO = new OrderDAO();
     }
 
     public List<ComboItem<Integer>> getCustomerItems() {
@@ -81,6 +85,18 @@ public class ComboItemsProvider {
             for (EmployeeModel emp : result.getLeft()) {
                 items.add(new ComboItem<>(emp.getId(),
                         emp.getId() + " - " + emp.getFirstName() + " " + emp.getLastName()));
+            }
+        }
+        return items;
+    }
+
+    public List<ComboItem<Integer>> getOrderItems() {
+        List<ComboItem<Integer>> items = new ArrayList<>();
+        var result = orderDAO.getOrders();
+        if (result.isLeft()) {
+            for (OrderModel o : result.getLeft()) {
+                items.add(new ComboItem<>(o.getId(),
+                        o.getId() + " - " + o.getCustomerName() + " (" + o.getOrderType() + ")"));
             }
         }
         return items;
