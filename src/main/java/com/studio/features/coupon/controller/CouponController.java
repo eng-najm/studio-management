@@ -40,6 +40,7 @@ public class CouponController {
             editCouponPage.setAdd(true);
         });
         couponPage.getRefreshButton().addActionListener(e -> fetchCoupons());
+        editCouponPage.getDeleteButton().addActionListener(e -> deleteCoupon());
         addTableRowClickListener();
     }
 
@@ -68,6 +69,26 @@ public class CouponController {
             JOptionPane.showMessageDialog(couponPage, "Successfully added coupon");
         } else {
             JOptionPane.showMessageDialog(couponPage, "Failed to add coupon");
+        }
+    }
+
+    void deleteCoupon() {
+        int id = editCouponPage.getCurrentData().getId();
+        if (id == 0) {
+            return;
+        }
+        int confirm = JOptionPane.showConfirmDialog(couponPage,
+                "Are you sure you want to delete this coupon?",
+                "Confirm Delete", JOptionPane.YES_NO_OPTION);
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+        boolean result = couponDAO.deleteCoupon(id);
+        if (result) {
+            JOptionPane.showMessageDialog(couponPage, "Successfully deleted coupon");
+            route.goTo(AppRoutes.COUPON_MANAGEMENT);
+        } else {
+            JOptionPane.showMessageDialog(couponPage, "Failed to delete coupon");
         }
     }
 

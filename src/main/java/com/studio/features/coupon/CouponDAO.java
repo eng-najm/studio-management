@@ -69,4 +69,9 @@ public class CouponDAO extends BaseDAO {
         }
     }
 
+    public boolean deleteCoupon(int id) {
+        String sql = "DELETE FROM COUPON WHERE ID = ?";
+        return executeUpdate(sql, id) > 0;
+    }
+
 }

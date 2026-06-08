@@ -110,6 +110,10 @@ public class EditCouponPage extends JPanel {
         return addButton;
     }
 
+    public AppButton getDeleteButton() {
+        return deleteButton;
+    }
+
     public void setAdd(boolean isAdd) {
         if (isAdd) {
             idField.setText("");
