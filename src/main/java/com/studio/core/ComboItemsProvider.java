@@ -11,6 +11,8 @@ import com.studio.features.customer.CustomerDAO;
 import com.studio.features.customer.model.CustomerModel;
 import com.studio.features.employee_management.EmployeeDAO;
 import com.studio.features.employee_management.model.EmployeeModel;
+import com.studio.features.invoice.InvoiceDAO;
+import com.studio.features.invoice.model.InvoiceModel;
 import com.studio.features.order.OrderDAO;
 import com.studio.features.order.model.OrderModel;
 
@@ -20,12 +22,14 @@ public class ComboItemsProvider {
     private final EmployeeDAO employeeDAO;
     private final CouponDAO couponDAO;
     private final OrderDAO orderDAO;
+    private final InvoiceDAO invoiceDAO;
 
     public ComboItemsProvider() {
         customerDAO = new CustomerDAO();
         employeeDAO = new EmployeeDAO();
         couponDAO = new CouponDAO();
         orderDAO = new OrderDAO();
+        invoiceDAO = new InvoiceDAO();
     }
 
     public List<ComboItem<Integer>> getCustomerItems() {
@@ -87,6 +91,27 @@ public class ComboItemsProvider {
                         emp.getId() + " - " + emp.getFirstName() + " " + emp.getLastName()));
             }
         }
+        return items;
+    }
+
+    public List<ComboItem<Integer>> getInvoiceItems() {
+        List<ComboItem<Integer>> items = new ArrayList<>();
+        var result = invoiceDAO.getInvoices();
+        if (result.isLeft()) {
+            for (InvoiceModel inv : result.getLeft()) {
+                items.add(new ComboItem<>(inv.getOrderId(),
+                        inv.getOrderId() + " - " + inv.getInvoiceDate() + " (" + inv.getNetAmount() + ")"));
+            }
+        }
+        return items;
+    }
+
+    public List<ComboItem<String>> getEmployeeTypeItems() {
+        List<ComboItem<String>> items = new ArrayList<>();
+        items.add(new ComboItem<>(EmployeeType.RECEPTIONIST, EmployeeType.RECEPTIONIST));
+        items.add(new ComboItem<>(EmployeeType.MANAGER, EmployeeType.MANAGER));
+        items.add(new ComboItem<>(EmployeeType.PHOTOGRAPHER, EmployeeType.PHOTOGRAPHER));
+        items.add(new ComboItem<>(EmployeeType.OTHER, EmployeeType.OTHER));
         return items;
     }
 

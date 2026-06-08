@@ -35,6 +35,9 @@ import com.studio.features.order.view.OrderPage;
 import com.studio.features.skill.controller.SkillController;
 import com.studio.features.skill.view.EditSkillPage;
 import com.studio.features.skill.view.SkillPage;
+import com.studio.features.payment.controller.PaymentController;
+import com.studio.features.payment.view.EditPaymentPage;
+import com.studio.features.payment.view.PaymentPage;
 
 public class DashboardPage extends JPanel {
     DashItem[] dashItems = {
@@ -45,6 +48,7 @@ public class DashboardPage extends JPanel {
             new DashItem("Skill Management", "", AppRoutes.SKILL_MANAGEMENT),
             new DashItem("Attendance Management", "", AppRoutes.ATTENDANCE_MANAGEMENT),
             new DashItem("Invoice Management", "", AppRoutes.INVOICE_MANAGEMENT),
+            new DashItem("Payment Management", "", AppRoutes.PAYMENT_MANAGEMENT),
     };
     AppButton empButton;
     AppButton custButton;
@@ -53,6 +57,7 @@ public class DashboardPage extends JPanel {
     AppButton skillButton;
     AppButton attendanceButton;
     AppButton invoiceButton;
+    AppButton paymentButton;
 
     CardLayout cardLayout = new CardLayout();
     JPanel container = new JPanel(cardLayout);
@@ -71,6 +76,8 @@ public class DashboardPage extends JPanel {
     EditAttendancePage editAttendancePage;
     InvoicePage invoicePage;
     EditInvoicePage editInvoicePage;
+    PaymentPage paymentPage;
+    EditPaymentPage editPaymentPage;
 
     public DashboardPage() {
         NavigationController nav = new NavigationController(this);
@@ -96,6 +103,9 @@ public class DashboardPage extends JPanel {
         invoicePage = new InvoicePage();
         editInvoicePage = new EditInvoicePage();
         new InvoiceController(invoicePage, editInvoicePage, this);
+        paymentPage = new PaymentPage();
+        editPaymentPage = new EditPaymentPage();
+        new PaymentController(paymentPage, editPaymentPage, this);
 
         this.setLayout(new BorderLayout());
         //
@@ -123,6 +133,9 @@ public class DashboardPage extends JPanel {
         items.add(Box.createRigidArea(new Dimension(0, 30)));
         invoiceButton = new AppButton(dashItems[6].getName());
         items.add(invoiceButton);
+        items.add(Box.createRigidArea(new Dimension(0, 30)));
+        paymentButton = new AppButton(dashItems[7].getName());
+        items.add(paymentButton);
 
         //
         container.add(employeePage, AppRoutes.EMPLOYEE_MANAGEMENT);
@@ -140,6 +153,8 @@ public class DashboardPage extends JPanel {
         container.add(editAttendancePage, AppRoutes.EDIT_ATTENDANCE);
         container.add(invoicePage, AppRoutes.INVOICE_MANAGEMENT);
         container.add(editInvoicePage, AppRoutes.EDIT_INVOICE);
+        container.add(paymentPage, AppRoutes.PAYMENT_MANAGEMENT);
+        container.add(editPaymentPage, AppRoutes.EDIT_PAYMENT);
         this.add(items, BorderLayout.WEST);
         this.add(container, BorderLayout.CENTER);
 
@@ -184,6 +199,10 @@ public class DashboardPage extends JPanel {
 
     public AppButton getInvoiceButton() {
         return this.invoiceButton;
+    }
+
+    public AppButton getPaymentButton() {
+        return this.paymentButton;
     }
 
     public CardLayout getCardLayout() {
