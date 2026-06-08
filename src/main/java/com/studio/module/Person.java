@@ -11,9 +11,10 @@ public abstract class Person {
     private String phone;
     private String address;
     private Date hireDate;
+    private String personType;
 
     public Person(int id, String firstName, String meddilName, String lastName, char sex, String phone, String address,
-            Date hireDate) {
+            Date hireDate, String personType) {
         this.id = id;
         this.firstName = firstName;
         this.meddilName = meddilName;
@@ -22,16 +23,15 @@ public abstract class Person {
         this.phone = phone;
         this.address = address;
         this.hireDate = hireDate;
+        this.personType = personType;
     }
 
-    public Person(String firstName, String meddilName, String lastName, char sex, String phone, String address) {
-        this.firstName = firstName;
-        this.meddilName = meddilName;
-        this.lastName = lastName;
-        this.sex = sex;
-        this.phone = phone;
-        this.address = address;
-        this.hireDate = new Date();
+    public String getPersonType() {
+        return personType;
+    }
+
+    public void setPersonType(String personType) {
+        this.personType = personType;
     }
 
     public int getId() {
