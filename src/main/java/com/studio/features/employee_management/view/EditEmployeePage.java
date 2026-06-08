@@ -5,13 +5,17 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.studio.core.model.ComboItem;
 import com.studio.core.shared_widgets.AppButton;
 import com.studio.core.shared_widgets.AppFiled;
 import com.studio.core.shared_widgets.AppLable;
@@ -25,7 +29,7 @@ public class EditEmployeePage extends JPanel {
     AppFiled sexField = new AppFiled();
     AppFiled phoneField = new AppFiled();
     AppFiled addressField = new AppFiled();
-    AppFiled empTypeField = new AppFiled();
+    JComboBox<ComboItem<?>> empTypeCombo = new JComboBox<>();
     AppFiled salaryField = new AppFiled();
     AppFiled userNameField = new AppFiled();
     AppFiled passwordField = new AppFiled();
@@ -51,7 +55,7 @@ public class EditEmployeePage extends JPanel {
         addField(formPanel, "Sex", sexField);
         addField(formPanel, "Phone", phoneField);
         addField(formPanel, "Address", addressField);
-        addField(formPanel, "Emp Type", empTypeField);
+        addComboField(formPanel, "Emp Type", empTypeCombo);
         addField(formPanel, "Salary", salaryField);
         addField(formPanel, "Username", userNameField);
         addField(formPanel, "Password", passwordField);
@@ -82,6 +86,25 @@ public class EditEmployeePage extends JPanel {
         panel.add(Box.createRigidArea(new Dimension(0, 15)));
     }
 
+    private void addComboField(JPanel panel, String labelText, JComboBox<?> combo) {
+        AppLable label = new AppLable(labelText);
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        combo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        combo.setPreferredSize(new Dimension(400, 45));
+        combo.setMinimumSize(new Dimension(400, 45));
+        combo.setMaximumSize(new Dimension(400, 45));
+        panel.add(label);
+        panel.add(Box.createRigidArea(new Dimension(0, 5)));
+        panel.add(combo);
+        panel.add(Box.createRigidArea(new Dimension(0, 15)));
+    }
+
+    public void setEmpTypeComboItems(List<ComboItem<String>> items) {
+        DefaultComboBoxModel<ComboItem<?>> model = new DefaultComboBoxModel<>();
+        model.addAll(items);
+        empTypeCombo.setModel(model);
+    }
+
     public void setEmployeeData(EmployeeModel employee) {
         idField.setText(employee.getId() + "");
         firstNameField.setText(employee.getFirstName());
@@ -90,10 +113,20 @@ public class EditEmployeePage extends JPanel {
         sexField.setText(String.valueOf(employee.getSex()));
         phoneField.setText(employee.getPhone());
         addressField.setText(employee.getAddress());
-        empTypeField.setText(employee.getEmpType());
+        selectByValue(empTypeCombo, employee.getEmpType());
         salaryField.setText(String.valueOf(employee.getSalary()));
         userNameField.setText(employee.getUserName());
         passwordField.setText(employee.getUserPassword());
+    }
+
+    private void selectByValue(JComboBox<ComboItem<?>> combo, String value) {
+        for (int i = 0; i < combo.getItemCount(); i++) {
+            ComboItem<?> item = combo.getItemAt(i);
+            if (item.getValue() != null && item.getValue().equals(value)) {
+                combo.setSelectedIndex(i);
+                return;
+            }
+        }
     }
 
     public EmployeeModel getCurrentData() {
@@ -109,10 +142,18 @@ public class EditEmployeePage extends JPanel {
         int salary = salaryField.getText().isEmpty() ? 0 : Integer.parseInt(salaryField.getText());
         String userName = userNameField.getText();
         String password = passwordField.getText();
-        String empType = empTypeField.getText();
+        String empType = getSelectedValue(empTypeCombo);
 
         return new EmployeeModel(id, firstName, middleName, lastName, sex, phone, address, hireDate, personType, salary,
                 userName, password, empType);
+    }
+
+    private String getSelectedValue(JComboBox<ComboItem<?>> combo) {
+        ComboItem<?> item = (ComboItem<?>) combo.getSelectedItem();
+        if (item != null && item.getValue() != null) {
+            return (String) item.getValue();
+        }
+        return "";
     }
 
     public AppButton getApplyChangeButton() {
@@ -140,7 +181,6 @@ public class EditEmployeePage extends JPanel {
             sexField.setText("");
             phoneField.setText("");
             addressField.setText("");
-            empTypeField.setText("");
             salaryField.setText("");
             userNameField.setText("");
             passwordField.setText("");

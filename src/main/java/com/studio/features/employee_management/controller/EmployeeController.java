@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import com.studio.core.ComboItemsProvider;
 import com.studio.core.Either;
 import com.studio.core.constants.AppRoutes;
 import com.studio.features.dashboard.view.DashboardPage;
@@ -23,12 +24,14 @@ public class EmployeeController {
     private EditEmployeePage editEmployeePage;
     DashboardPage route;
     private EmployeeDAO employeeDAO;
+    private ComboItemsProvider comboProvider;
 
     public EmployeeController(EmployeePage employeePage, EditEmployeePage editEmployeePage, DashboardPage route) {
         this.employeePage = employeePage;
         this.editEmployeePage = editEmployeePage;
         this.route = route;
         employeeDAO = new EmployeeDAO();
+        comboProvider = new ComboItemsProvider();
         init();
     }
 
@@ -46,6 +49,7 @@ public class EmployeeController {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
+                editEmployeePage.setEmpTypeComboItems(comboProvider.getEmployeeTypeItems());
                 route.goTo(AppRoutes.EDITE_EMPLOYEE);
                 editEmployeePage.setAdd(true);
             }
@@ -95,6 +99,7 @@ public class EmployeeController {
                 if (row >= 0) {
 
                     EmployeeTable emp = (EmployeeTable) table.getModel();
+                    editEmployeePage.setEmpTypeComboItems(comboProvider.getEmployeeTypeItems());
                     editEmployeePage.setEmployeeData(emp.getEmployeeAt(row));
                     route.goTo(AppRoutes.EDITE_EMPLOYEE);
                     editEmployeePage.setAdd(false);
