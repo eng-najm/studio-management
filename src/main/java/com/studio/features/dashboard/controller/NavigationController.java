@@ -14,6 +14,8 @@ public class NavigationController {
     public void init() {
         dashboardPage.getEmpButton().addActionListener(e -> dashboardPage.goTo(AppRoutes.EMPLOYEE_MANAGEMENT));
         dashboardPage.getCustButton().addActionListener(e -> dashboardPage.goTo(AppRoutes.CUSTOMER_MANAGEMENT));
+        dashboardPage.getCouponButton().addActionListener(e -> dashboardPage.goTo(AppRoutes.COUPON_MANAGEMENT));
+        dashboardPage.getSkillButton().addActionListener(e -> dashboardPage.goTo(AppRoutes.SKILL_MANAGEMENT));
     }
 
 }
