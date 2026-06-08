@@ -29,14 +29,35 @@ public class EmployeeDAO extends BaseDAO {
         }
     }
 
+    public int addEmployee(EmployeeModel employeeModel) {
+        String sql = "DECLARE " +
+                "  emp_id NUMBER; " +
+                "BEGIN " +
+                "  INSERT INTO Person (FIRST_NAME, MIDDLE_NAME, LAST_NAME, ADDRESS, PHONE, SEX, PERSON_TYPE) " +
+                "  VALUES (?, ?, ?, ?, ?, ?, 'EMPLOYEE') " +
+                "  RETURNING ID INTO emp_id; " +
+                "  " +
+                "  INSERT INTO Employee (PERSON_ID, SALARY, EMP_TYPE, USER_NAME, USER_PASSWORD, HIRE_DATE) " +
+                "  VALUES (emp_id, ?, ?, ?, ?, SYSDATE); " +
+                "END;";
+        int row = executeUpdate(sql,
+                employeeModel.getFirstName(),
+                employeeModel.getMeddilName(),
+                employeeModel.getLastName(),
+                employeeModel.getAddress(),
+                employeeModel.getPhone(),
+                String.valueOf(employeeModel.getSex()),
+                employeeModel.getSalary(),
+                employeeModel.getEmpType(),
+                employeeModel.getUserName(),
+                employeeModel.getUserPassword());
+
+        return row;
+    }
+
     public boolean updateEmployee(EmployeeModel employee) {
         String updatePersonSQL = "UPDATE Person SET FIRST_NAME = ?, MIDDLE_NAME = ?, LAST_NAME = ?, ADDRESS = ?, PHONE = ?, SEX = ? WHERE ID = ?";
-        String updateEmployeeSQL = "UPDATE Employee SET SALARY = ?, ROLE = ?, USER_NAME = ?, USER_PASSWORD = ? WHERE PERSON_ID = ?"; // أزلت
-                                                                                                                                     // HIRE_DATE
-                                                                                                                                     // إذا
-                                                                                                                                     // لم
-                                                                                                                                     // تكن
-                                                                                                                                     // تعدله
+        String updateEmployeeSQL = "UPDATE Employee SET SALARY = ?, EMP_TYPE = ?, USER_NAME = ?, USER_PASSWORD = ? WHERE PERSON_ID = ?";
 
         try (Connection conn = DBHelper.connection()) {
 
@@ -55,7 +76,7 @@ public class EmployeeDAO extends BaseDAO {
                 psPerson.executeUpdate();
 
                 psEmployee.setDouble(1, employee.getSalary());
-                psEmployee.setString(2, employee.getRole());
+                psEmployee.setString(2, employee.getEmpType());
                 psEmployee.setString(3, employee.getUserName());
                 psEmployee.setString(4, employee.getUserPassword());
                 psEmployee.setInt(5, employee.getId());

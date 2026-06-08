@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -21,13 +22,16 @@ public class EditEmployeePage extends JPanel {
     AppFiled firstNameField = new AppFiled();
     AppFiled middleNameField = new AppFiled();
     AppFiled lastNameField = new AppFiled();
+    AppFiled sexField = new AppFiled();
     AppFiled phoneField = new AppFiled();
     AppFiled addressField = new AppFiled();
+    AppFiled empTypeField = new AppFiled();
     AppFiled salaryField = new AppFiled();
     AppFiled userNameField = new AppFiled();
     AppFiled passwordField = new AppFiled();
-    private EmployeeModel currentData;
     private AppButton applyChangeButton;
+    private AppButton addButton;
+    private AppButton deleteButton;
 
     private AppButton backButton;
 
@@ -35,6 +39,8 @@ public class EditEmployeePage extends JPanel {
         this.setLayout(new BorderLayout());
         backButton = new AppButton("Back");
         applyChangeButton = new AppButton("Apply Changes");
+        addButton = new AppButton("Add");
+        deleteButton = new AppButton("Delete");
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
         formPanel.setBorder(BorderFactory.createEmptyBorder(30, 50, 30, 50));
@@ -42,8 +48,10 @@ public class EditEmployeePage extends JPanel {
         addField(formPanel, "First Name", firstNameField);
         addField(formPanel, "Middle Name", middleNameField);
         addField(formPanel, "Last Name", lastNameField);
+        addField(formPanel, "Sex", sexField);
         addField(formPanel, "Phone", phoneField);
         addField(formPanel, "Address", addressField);
+        addField(formPanel, "Emp Type", empTypeField);
         addField(formPanel, "Salary", salaryField);
         addField(formPanel, "Username", userNameField);
         addField(formPanel, "Password", passwordField);
@@ -53,7 +61,10 @@ public class EditEmployeePage extends JPanel {
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
+
+        buttonPanel.add(addButton);
         buttonPanel.add(applyChangeButton);
+        buttonPanel.add(deleteButton);
         buttonPanel.add(backButton);
 
         this.add(scrollPane, BorderLayout.CENTER);
@@ -72,31 +83,36 @@ public class EditEmployeePage extends JPanel {
     }
 
     public void setEmployeeData(EmployeeModel employee) {
-        this.currentData = employee;
         idField.setText(employee.getId() + "");
         firstNameField.setText(employee.getFirstName());
         middleNameField.setText(employee.getMeddilName());
         lastNameField.setText(employee.getLastName());
+        sexField.setText(String.valueOf(employee.getSex()));
         phoneField.setText(employee.getPhone());
         addressField.setText(employee.getAddress());
+        empTypeField.setText(employee.getEmpType());
         salaryField.setText(String.valueOf(employee.getSalary()));
         userNameField.setText(employee.getUserName());
         passwordField.setText(employee.getUserPassword());
     }
 
     public EmployeeModel getCurrentData() {
-        currentData.setId(Integer.parseInt(idField.getText()));
-        currentData.setId(Integer.parseInt(idField.getText()));
-        currentData.setFirstName(firstNameField.getText());
-        currentData.setMeddilName(middleNameField.getText());
-        currentData.setLastName(lastNameField.getText());
-        currentData.setPhone(phoneField.getText());
-        currentData.setAddress(addressField.getText());
-        currentData.setSalary(Integer.parseInt(salaryField.getText()));
-        currentData.setUserName(userNameField.getText());
-        currentData.setUserPassword(passwordField.getText());
+        int id = idField.getText().isEmpty() ? 0 : Integer.parseInt(idField.getText());
+        String firstName = firstNameField.getText();
+        String middleName = middleNameField.getText();
+        String lastName = lastNameField.getText();
+        char sex = sexField.getText().isEmpty() ? 'M' : sexField.getText().charAt(0);
+        String phone = phoneField.getText();
+        String address = addressField.getText();
+        Date hireDate = new Date();
+        String personType = "EMPLOYEE";
+        int salary = salaryField.getText().isEmpty() ? 0 : Integer.parseInt(salaryField.getText());
+        String userName = userNameField.getText();
+        String password = passwordField.getText();
+        String empType = empTypeField.getText();
 
-        return currentData;
+        return new EmployeeModel(id, firstName, middleName, lastName, sex, phone, address, hireDate, personType, salary,
+                userName, password, empType);
     }
 
     public AppButton getApplyChangeButton() {
@@ -106,4 +122,32 @@ public class EditEmployeePage extends JPanel {
     public AppButton getBackButton() {
         return backButton;
     }
+
+    public AppButton getAddButton() {
+        return addButton;
+    }
+
+    public void setAddButton(AppButton addButton) {
+        this.addButton = addButton;
+    }
+
+    public void setAdd(boolean isAdd) {
+        if (isAdd) {
+            idField.setText("");
+            firstNameField.setText("");
+            middleNameField.setText("");
+            lastNameField.setText("");
+            sexField.setText("");
+            phoneField.setText("");
+            addressField.setText("");
+            empTypeField.setText("");
+            salaryField.setText("");
+            userNameField.setText("");
+            passwordField.setText("");
+        }
+        deleteButton.setVisible(!isAdd);
+        applyChangeButton.setVisible(!isAdd);
+        addButton.setVisible(isAdd);
+    }
+
 }

@@ -7,8 +7,8 @@ import javax.swing.table.AbstractTableModel;
 import com.studio.features.employee_management.model.EmployeeModel;
 
 public class EmployeeTable extends AbstractTableModel {
-    private final String[] columnNames = {"ID", "First Name", "Middle Name", "Last Name",
-            "Sex", "Phone", "Address", "Role", "Salary", "Username", "Password" };
+    private final String[] columnNames = { "ID", "First Name", "Middle Name", "Last Name",
+            "Sex", "Phone", "Address", "Emp Type", "Salary", "Username", "Password" };
     private final List<EmployeeModel> employees;
 
     public EmployeeTable(List<EmployeeModel> employees) {
@@ -50,7 +50,7 @@ public class EmployeeTable extends AbstractTableModel {
             case 6:
                 return employee.getAddress();
             case 7:
-                return employee.getRole();
+                return employee.getEmpType();
             case 8:
                 return employee.getSalary();
             case 9:

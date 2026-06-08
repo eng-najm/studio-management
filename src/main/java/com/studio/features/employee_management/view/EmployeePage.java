@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -16,6 +17,7 @@ import com.studio.features.employee_management.model.EmployeeModel;
 public class EmployeePage extends JPanel {
     EmployeeTable tableModel;
     JTable table;
+    private JButton createButton;
 
     public EmployeePage() {
 
@@ -27,14 +29,24 @@ public class EmployeePage extends JPanel {
 
         table.setFont(new Font("", Font.PLAIN, 20));
         table.setRowHeight(35);
-        // table.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
 
         JScrollPane scrollPane = new JScrollPane(table);
         taplePanel.add(scrollPane, BorderLayout.CENTER);
         taplePanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         add(taplePanel, BorderLayout.CENTER);
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BorderLayout());
 
-        this.add(new AppLable("Employee Management"), BorderLayout.NORTH);
+        // (اختياري) إضافة مسافة بادئة (Padding) حول حواف اللوحة لتبدو أجمل
+        topPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        // 2. إنشاء زر "إنشاء"
+        createButton = new JButton("Create");
+
+        // 3. إضافة الزر إلى طرف اللوحة (الشرق/اليمين)
+        topPanel.add(createButton, BorderLayout.EAST);
+        topPanel.add(new AppLable("Employee Management"), BorderLayout.CENTER);
+
+        taplePanel.add(topPanel, BorderLayout.NORTH);
 
     }
 
@@ -51,6 +63,10 @@ public class EmployeePage extends JPanel {
 
     public EmployeeTable getTableModel() {
         return tableModel;
+    }
+
+    public JButton getCreateButton() {
+        return createButton;
     }
 
 }
