@@ -22,6 +22,10 @@ import com.studio.features.customer.view.EditCustomerPage;
 import com.studio.features.dashboard.controller.NavigationController;
 import com.studio.features.employee_management.view.EditEmployeePage;
 import com.studio.features.employee_management.view.EmployeePage;
+import com.studio.features.order.controller.OrderController;
+import com.studio.features.order.view.EditOrderPage;
+import com.studio.features.order.view.OrderDetailPage;
+import com.studio.features.order.view.OrderPage;
 import com.studio.features.skill.controller.SkillController;
 import com.studio.features.skill.view.EditSkillPage;
 import com.studio.features.skill.view.SkillPage;
@@ -30,7 +34,7 @@ public class DashboardPage extends JPanel {
     DashItem[] dashItems = {
             new DashItem("Employee Management", "", AppRoutes.EMPLOYEE_MANAGEMENT),
             new DashItem("Customer Management", "", AppRoutes.CUSTOMER_MANAGEMENT),
-            new DashItem("Order Management", "", ""),
+            new DashItem("Order Management", "", AppRoutes.ORDER_MANAGEMENT),
             new DashItem("Coupon Management", "", AppRoutes.COUPON_MANAGEMENT),
             new DashItem("Skill Management", "", AppRoutes.SKILL_MANAGEMENT),
     };
@@ -50,6 +54,9 @@ public class DashboardPage extends JPanel {
     EditCouponPage editCouponPage;
     SkillPage skillPage;
     EditSkillPage editSkillPage;
+    OrderPage orderPage;
+    OrderDetailPage orderDetailPage;
+    EditOrderPage editOrderPage;
 
     public DashboardPage() {
         NavigationController nav = new NavigationController(this);
@@ -58,7 +65,6 @@ public class DashboardPage extends JPanel {
         new EmployeeController(employeePage, editEmployeePage, this);
         customerPage = new CustomerPage();
         editCustomerPage = new EditCustomerPage();
-        new EmployeeController(employeePage, editEmployeePage, this);
         new CustomerController(customerPage, editCustomerPage, this);
         couponPage = new CouponPage();
         editCouponPage = new EditCouponPage();
@@ -66,6 +72,10 @@ public class DashboardPage extends JPanel {
         skillPage = new SkillPage();
         editSkillPage = new EditSkillPage();
         new SkillController(skillPage, editSkillPage, this);
+        orderPage = new OrderPage();
+        orderDetailPage = new OrderDetailPage();
+        editOrderPage = new EditOrderPage();
+        new OrderController(orderPage, orderDetailPage, editOrderPage, this);
 
         this.setLayout(new BorderLayout());
         //
@@ -97,6 +107,9 @@ public class DashboardPage extends JPanel {
         container.add(editCouponPage, AppRoutes.EDIT_COUPON);
         container.add(skillPage, AppRoutes.SKILL_MANAGEMENT);
         container.add(editSkillPage, AppRoutes.EDIT_SKILL);
+        container.add(orderPage, AppRoutes.ORDER_MANAGEMENT);
+        container.add(orderDetailPage, AppRoutes.ORDER_DETAIL);
+        container.add(editOrderPage, AppRoutes.EDIT_ORDER);
         this.add(items, BorderLayout.WEST);
         this.add(container, BorderLayout.CENTER);
 

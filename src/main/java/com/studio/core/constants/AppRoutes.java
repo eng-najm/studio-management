@@ -11,5 +11,8 @@ public class AppRoutes {
     public final static String EDIT_COUPON = "EDIT_COUPON";
     public final static String SKILL_MANAGEMENT = "SKILL_MANAGEMENT";
     public final static String EDIT_SKILL = "EDIT_SKILL";
+    public final static String ORDER_MANAGEMENT = "ORDER_MANAGEMENT";
+    public final static String ORDER_DETAIL = "ORDER_DETAIL";
+    public final static String EDIT_ORDER = "EDIT_ORDER";
 
 }
