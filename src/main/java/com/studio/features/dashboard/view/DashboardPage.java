@@ -13,6 +13,9 @@ import com.studio.core.constants.AppRoutes;
 import com.studio.core.shared_widgets.AppButton;
 import com.studio.features.dashboard.model.DashItem;
 import com.studio.features.employee_management.controller.EmployeeController;
+import com.studio.features.attendance.controller.AttendanceController;
+import com.studio.features.attendance.view.AttendancePage;
+import com.studio.features.attendance.view.EditAttendancePage;
 import com.studio.features.coupon.controller.CouponController;
 import com.studio.features.coupon.view.CouponPage;
 import com.studio.features.coupon.view.EditCouponPage;
@@ -37,12 +40,14 @@ public class DashboardPage extends JPanel {
             new DashItem("Order Management", "", AppRoutes.ORDER_MANAGEMENT),
             new DashItem("Coupon Management", "", AppRoutes.COUPON_MANAGEMENT),
             new DashItem("Skill Management", "", AppRoutes.SKILL_MANAGEMENT),
+            new DashItem("Attendance Management", "", AppRoutes.ATTENDANCE_MANAGEMENT),
     };
     AppButton empButton;
     AppButton custButton;
     AppButton orderButton;
     AppButton couponButton;
     AppButton skillButton;
+    AppButton attendanceButton;
 
     CardLayout cardLayout = new CardLayout();
     JPanel container = new JPanel(cardLayout);
@@ -57,6 +62,8 @@ public class DashboardPage extends JPanel {
     OrderPage orderPage;
     OrderDetailPage orderDetailPage;
     EditOrderPage editOrderPage;
+    AttendancePage attendancePage;
+    EditAttendancePage editAttendancePage;
 
     public DashboardPage() {
         NavigationController nav = new NavigationController(this);
@@ -76,6 +83,9 @@ public class DashboardPage extends JPanel {
         orderDetailPage = new OrderDetailPage();
         editOrderPage = new EditOrderPage();
         new OrderController(orderPage, orderDetailPage, editOrderPage, this);
+        attendancePage = new AttendancePage();
+        editAttendancePage = new EditAttendancePage();
+        new AttendanceController(attendancePage, editAttendancePage, this);
 
         this.setLayout(new BorderLayout());
         //
@@ -97,6 +107,9 @@ public class DashboardPage extends JPanel {
         items.add(Box.createRigidArea(new Dimension(0, 30)));
         skillButton = new AppButton(dashItems[4].getName());
         items.add(skillButton);
+        items.add(Box.createRigidArea(new Dimension(0, 30)));
+        attendanceButton = new AppButton(dashItems[5].getName());
+        items.add(attendanceButton);
 
         //
         container.add(employeePage, AppRoutes.EMPLOYEE_MANAGEMENT);
@@ -110,6 +123,8 @@ public class DashboardPage extends JPanel {
         container.add(orderPage, AppRoutes.ORDER_MANAGEMENT);
         container.add(orderDetailPage, AppRoutes.ORDER_DETAIL);
         container.add(editOrderPage, AppRoutes.EDIT_ORDER);
+        container.add(attendancePage, AppRoutes.ATTENDANCE_MANAGEMENT);
+        container.add(editAttendancePage, AppRoutes.EDIT_ATTENDANCE);
         this.add(items, BorderLayout.WEST);
         this.add(container, BorderLayout.CENTER);
 
@@ -146,6 +161,10 @@ public class DashboardPage extends JPanel {
 
     public AppButton getSkillButton() {
         return this.skillButton;
+    }
+
+    public AppButton getAttendanceButton() {
+        return this.attendanceButton;
     }
 
     public CardLayout getCardLayout() {

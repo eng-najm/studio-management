@@ -17,6 +17,7 @@ public class NavigationController {
         dashboardPage.getOrderButton().addActionListener(e -> dashboardPage.goTo(AppRoutes.ORDER_MANAGEMENT));
         dashboardPage.getCouponButton().addActionListener(e -> dashboardPage.goTo(AppRoutes.COUPON_MANAGEMENT));
         dashboardPage.getSkillButton().addActionListener(e -> dashboardPage.goTo(AppRoutes.SKILL_MANAGEMENT));
+        dashboardPage.getAttendanceButton().addActionListener(e -> dashboardPage.goTo(AppRoutes.ATTENDANCE_MANAGEMENT));
     }
 
 }
