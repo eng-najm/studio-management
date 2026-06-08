@@ -13,7 +13,7 @@ import com.studio.features.employee_management.model.EmployeeModel;
 
 public class EmployeeDAO extends BaseDAO {
     public Either<ArrayList<EmployeeModel>, Exception> getEmployees() {
-        String sql = "SELECT p.*,e.* from Person p join Employee e on p.id = e.person_id";
+        String sql = "SELECT p.*,e.* from Person p join Employee e on p.id = e.person_id ";
         try {
 
             ResultSet resultSet = executeQuery(sql);
@@ -94,6 +94,23 @@ public class EmployeeDAO extends BaseDAO {
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
+        }
+    }
+
+    public Either<ArrayList<EmployeeModel>, Exception> getEmployeesByType(String empType) {
+        String sql = "SELECT p.*,e.* from Person p join Employee e on p.id = e.person_id where e.EMP_TYPE = ?";
+        try {
+
+            ResultSet resultSet = executeQuery(sql, empType);
+            ArrayList<EmployeeModel> employeeModels = new ArrayList<>();
+            while (resultSet.next()) {
+                employeeModels.add(EmployeeModel.fromResult(resultSet));
+            }
+
+            return Either.left(employeeModels);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return Either.right(new IllegalAccessException("UnKnowns"));
         }
     }
 }
