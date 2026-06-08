@@ -58,8 +58,4 @@ public class InvoiceDAO extends BaseDAO {
         }
     }
 
-    public boolean deleteInvoice(int id) {
-        String sql = "DELETE FROM INVOICE WHERE ORDER_ID = ?";
-        return executeUpdate(sql, id) > 0;
-    }
 }

@@ -37,7 +37,6 @@ public class InvoiceController {
 
         editInvoicePage.getBackButton().addActionListener(e -> route.goTo(AppRoutes.INVOICE_MANAGEMENT));
         editInvoicePage.getApplyChangeButton().addActionListener(e -> editInvoice());
-        editInvoicePage.getDeleteButton().addActionListener(e -> deleteInvoice());
 
         addTableClickListener();
     }
@@ -64,24 +63,7 @@ public class InvoiceController {
         }
     }
 
-    void deleteInvoice() {
-        int orderId = editInvoicePage.getCurrentData().getOrderId();
-        if (orderId == 0)
-            return;
-        int confirm = JOptionPane.showConfirmDialog(editInvoicePage,
-                "Are you sure you want to delete this invoice?",
-                "Confirm Delete", JOptionPane.YES_NO_OPTION);
-        if (confirm != JOptionPane.YES_OPTION)
-            return;
-        boolean result = invoiceDAO.deleteInvoice(orderId);
-        if (result) {
-            JOptionPane.showMessageDialog(invoicePage, "Successfully deleted invoice");
-            route.goTo(AppRoutes.INVOICE_MANAGEMENT);
-            fetchInvoices();
-        } else {
-            JOptionPane.showMessageDialog(invoicePage, "Failed to delete invoice");
-        }
-    }
+   
 
     void addTableClickListener() {
         JTable table = invoicePage.getTable();

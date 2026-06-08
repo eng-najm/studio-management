@@ -23,14 +23,12 @@ public class EditInvoicePage extends JPanel {
     private AppLable invoiceDateLabel = new AppLable("");
 
     private AppButton applyChangeButton;
-    private AppButton deleteButton;
     private AppButton backButton;
 
     public EditInvoicePage() {
         this.setLayout(new BorderLayout());
         backButton = new AppButton("Back");
         applyChangeButton = new AppButton("Apply Changes");
-        deleteButton = new AppButton("Delete");
 
         JPanel formPanel = new JPanel();
         formPanel.setLayout(new BoxLayout(formPanel, BoxLayout.Y_AXIS));
@@ -46,7 +44,6 @@ public class EditInvoicePage extends JPanel {
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
         buttonPanel.add(applyChangeButton);
-        buttonPanel.add(deleteButton);
         buttonPanel.add(backButton);
 
         this.add(scrollPane, BorderLayout.CENTER);
@@ -89,5 +86,4 @@ public class EditInvoicePage extends JPanel {
 
     public AppButton getApplyChangeButton() { return applyChangeButton; }
     public AppButton getBackButton() { return backButton; }
-    public AppButton getDeleteButton() { return deleteButton; }
 }
