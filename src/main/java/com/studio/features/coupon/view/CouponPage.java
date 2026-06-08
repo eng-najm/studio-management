@@ -55,6 +55,7 @@ public class CouponPage extends JPanel {
     public void populateCouponList(List<CouponModel> coupons) {
         tableModel = new CouponTable(coupons);
         table.setModel(tableModel);
+
         table.revalidate();
         table.repaint();
     }
