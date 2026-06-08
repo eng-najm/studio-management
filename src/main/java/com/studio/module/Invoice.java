@@ -1,48 +1,30 @@
 package com.studio.module;
 
-import java.util.Date;
-
 public class Invoice {
-    private int id;
     private int orderId;
-    private Date InvoicedAt;
+    private String invoiceDate;
     private double netAmount;
 
-    public Invoice(int id, int orderId, Date invoicedAt, double netAmount) {
-        this.id = id;
+    public Invoice(int orderId, String invoiceDate, double netAmount) {
         this.orderId = orderId;
-        InvoicedAt = invoicedAt;
+        this.invoiceDate = invoiceDate;
         this.netAmount = netAmount;
     }
 
-    public Invoice(int orderId, Date invoicedAt, double netAmount) {
-        this.orderId = orderId;
-        InvoicedAt = invoicedAt;
-        this.netAmount = netAmount;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getorderId() {
+    public int getOrderId() {
         return orderId;
     }
 
-    public void setorderId(int orderId) {
+    public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
 
-    public Date getInvoicedAt() {
-        return InvoicedAt;
+    public String getInvoiceDate() {
+        return invoiceDate;
     }
 
-    public void setInvoicedAt(Date invoicedAt) {
-        InvoicedAt = invoicedAt;
+    public void setInvoiceDate(String invoiceDate) {
+        this.invoiceDate = invoiceDate;
     }
 
     public double getNetAmount() {
