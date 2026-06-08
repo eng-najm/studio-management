@@ -73,4 +73,16 @@ public class ComboItemsProvider {
         }
         return items;
     }
+
+    public List<ComboItem<Integer>> getEmployeeItems() {
+        List<ComboItem<Integer>> items = new ArrayList<>();
+        var result = employeeDAO.getEmployees();
+        if (result.isLeft()) {
+            for (EmployeeModel emp : result.getLeft()) {
+                items.add(new ComboItem<>(emp.getId(),
+                        emp.getId() + " - " + emp.getFirstName() + " " + emp.getLastName()));
+            }
+        }
+        return items;
+    }
 }
