@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -11,6 +13,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.studio.core.FieldValidator;
+import com.studio.core.constants.ValidationType;
 import com.studio.core.shared_widgets.AppButton;
 import com.studio.core.shared_widgets.AppFiled;
 import com.studio.core.shared_widgets.AppLable;
@@ -82,6 +86,19 @@ public class EditInvoicePage extends JPanel {
         double netAmount = netAmountField.getText().isEmpty() ? 0.0
                 : Double.parseDouble(netAmountField.getText());
         return new InvoiceModel(currentOrderId, invoiceDate, netAmount);
+    }
+
+    public List<String> validateFields() {
+        List<String> errors = new ArrayList<>();
+        addError(errors, FieldValidator.validate("Net Amount", netAmountField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Net Amount", netAmountField.getText(), ValidationType.DECIMAL));
+        return errors;
+    }
+
+    private void addError(List<String> errors, String error) {
+        if (error != null) {
+            errors.add(error);
+        }
     }
 
     public AppButton getApplyChangeButton() { return applyChangeButton; }

@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import java.util.List;
+
 import com.studio.core.Either;
+import com.studio.core.FieldValidator;
 import com.studio.core.constants.AppRoutes;
 import com.studio.features.coupon.CouponDAO;
 import com.studio.features.coupon.model.CouponModel;
@@ -55,6 +58,11 @@ public class CouponController {
     }
 
     void editCoupon() {
+        List<String> errors = editCouponPage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(couponPage, errors);
+            return;
+        }
         boolean result = couponDAO.updateCoupon(editCouponPage.getCurrentData());
         if (result) {
             JOptionPane.showMessageDialog(couponPage, "Successfully updated coupon");
@@ -64,6 +72,11 @@ public class CouponController {
     }
 
     void addCoupon() {
+        List<String> errors = editCouponPage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(couponPage, errors);
+            return;
+        }
         int row = couponDAO.addCoupon(editCouponPage.getCurrentData());
         if (row > 0) {
             JOptionPane.showMessageDialog(couponPage, "Successfully added coupon");

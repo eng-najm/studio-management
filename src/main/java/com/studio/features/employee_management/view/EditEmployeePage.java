@@ -15,6 +15,11 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.studio.core.FieldValidator;
+import com.studio.core.constants.ValidationType;
 import com.studio.core.model.ComboItem;
 import com.studio.core.shared_widgets.AppButton;
 import com.studio.core.shared_widgets.AppFiled;
@@ -170,6 +175,29 @@ public class EditEmployeePage extends JPanel {
 
     public void setAddButton(AppButton addButton) {
         this.addButton = addButton;
+    }
+
+    public List<String> validateFields() {
+        List<String> errors = new ArrayList<>();
+        addError(errors, FieldValidator.validate("First Name", firstNameField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Middle Name", middleNameField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Last Name", lastNameField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Sex", sexField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Sex", sexField.getText(), ValidationType.SINGLE_CHAR));
+        addError(errors, FieldValidator.validate("Phone", phoneField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Address", addressField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validateComboRequired("Emp Type", empTypeCombo));
+        addError(errors, FieldValidator.validate("Salary", salaryField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Salary", salaryField.getText(), ValidationType.INTEGER));
+        addError(errors, FieldValidator.validate("Username", userNameField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Password", passwordField.getText(), ValidationType.REQUIRED));
+        return errors;
+    }
+
+    private void addError(List<String> errors, String error) {
+        if (error != null) {
+            errors.add(error);
+        }
     }
 
     public void setAdd(boolean isAdd) {

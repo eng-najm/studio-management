@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import java.util.List;
+
 import com.studio.core.Either;
+import com.studio.core.FieldValidator;
 import com.studio.core.constants.AppRoutes;
 import com.studio.features.dashboard.view.DashboardPage;
 import com.studio.features.invoice.InvoiceDAO;
@@ -52,6 +55,11 @@ public class InvoiceController {
     }
 
     void editInvoice() {
+        List<String> errors = editInvoicePage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(invoicePage, errors);
+            return;
+        }
         InvoiceModel invoice = editInvoicePage.getCurrentData();
         boolean result = invoiceDAO.updateInvoice(invoice);
         if (result) {

@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import java.util.List;
+
 import com.studio.core.Either;
+import com.studio.core.FieldValidator;
 import com.studio.core.constants.AppRoutes;
 import com.studio.features.dashboard.view.DashboardPage;
 import com.studio.features.order.OrderDAO;
@@ -131,11 +134,12 @@ public class OrderController {
     }
 
     void addOrder() {
-        OrderModel order = editOrderPage.getCurrentData();
-        if (order.getOrderType() == null || order.getOrderType().isEmpty()) {
-            JOptionPane.showMessageDialog(editOrderPage, "Please select an order type");
+        List<String> errors = editOrderPage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(orderPage, errors);
             return;
         }
+        OrderModel order = editOrderPage.getCurrentData();
         int orderId = orderDAO.addOrder(order);
         if (orderId > 0) {
             addTypeDetail(orderId);
@@ -159,6 +163,11 @@ public class OrderController {
     }
 
     void editOrder() {
+        List<String> errors = editOrderPage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(orderPage, errors);
+            return;
+        }
         OrderModel order = editOrderPage.getCurrentData();
         boolean result = orderDAO.updateOrder(order);
         if (result) {

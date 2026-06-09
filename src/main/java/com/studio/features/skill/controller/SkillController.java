@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import java.util.List;
+
 import com.studio.core.Either;
+import com.studio.core.FieldValidator;
 import com.studio.core.constants.AppRoutes;
 import com.studio.features.dashboard.view.DashboardPage;
 import com.studio.features.skill.SkillDAO;
@@ -55,6 +58,11 @@ public class SkillController {
     }
 
     void editSkill() {
+        List<String> errors = editSkillPage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(skillPage, errors);
+            return;
+        }
         boolean result = skillDAO.updateSkill(editSkillPage.getCurrentData());
         if (result) {
             JOptionPane.showMessageDialog(skillPage, "Successfully updated skill");
@@ -64,6 +72,11 @@ public class SkillController {
     }
 
     void addSkill() {
+        List<String> errors = editSkillPage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(skillPage, errors);
+            return;
+        }
         int row = skillDAO.addSkill(editSkillPage.getCurrentData());
         if (row > 0) {
             JOptionPane.showMessageDialog(skillPage, "Successfully added skill");

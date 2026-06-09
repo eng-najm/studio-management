@@ -5,7 +5,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -16,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import com.studio.core.ComboItemsProvider;
+import com.studio.core.FieldValidator;
+import com.studio.core.constants.ValidationType;
 import com.studio.core.model.ComboItem;
 import com.studio.core.shared_widgets.AppButton;
 import com.studio.core.shared_widgets.AppFiled;
@@ -136,6 +140,23 @@ public class EditAttendancePage extends JPanel {
                 combo.setSelectedIndex(i);
                 return;
             }
+        }
+    }
+
+    public List<String> validateFields() {
+        List<String> errors = new ArrayList<>();
+        addError(errors, FieldValidator.validateComboRequired("Employee", employeeCombo));
+        addError(errors, FieldValidator.validate("Check In", checkInField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Check In", checkInField.getText(), ValidationType.TIMESTAMP));
+        addError(errors, FieldValidator.validate("Check Out", checkOutField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Check Out", checkOutField.getText(), ValidationType.TIMESTAMP));
+        addError(errors, FieldValidator.validate("Date", dateField.getText(), ValidationType.REQUIRED));
+        return errors;
+    }
+
+    private void addError(List<String> errors, String error) {
+        if (error != null) {
+            errors.add(error);
         }
     }
 

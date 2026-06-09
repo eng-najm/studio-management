@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -12,6 +14,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import com.studio.core.FieldValidator;
+import com.studio.core.constants.ValidationType;
 import com.studio.core.shared_widgets.AppButton;
 import com.studio.core.shared_widgets.AppFiled;
 import com.studio.core.shared_widgets.AppLable;
@@ -95,6 +99,24 @@ public class EditCustomerPage extends JPanel {
         String personType = "CUSTOMER";
 
         return new CustomerModel(id, firstName, middleName, lastName, sex, phone, address, hireDate, personType);
+    }
+
+    public List<String> validateFields() {
+        List<String> errors = new ArrayList<>();
+        addError(errors, FieldValidator.validate("First Name", firstNameField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Middle Name", middleNameField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Last Name", lastNameField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Sex", sexField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Sex", sexField.getText(), ValidationType.SINGLE_CHAR));
+        addError(errors, FieldValidator.validate("Phone", phoneField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Address", addressField.getText(), ValidationType.REQUIRED));
+        return errors;
+    }
+
+    private void addError(List<String> errors, String error) {
+        if (error != null) {
+            errors.add(error);
+        }
     }
 
     public AppButton getApplyChangeButton() {

@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import java.util.List;
+
 import com.studio.core.Either;
+import com.studio.core.FieldValidator;
 import com.studio.core.constants.AppRoutes;
 import com.studio.features.customer.CustomerDAO;
 import com.studio.features.customer.model.CustomerModel;
@@ -58,6 +61,11 @@ public class CustomerController {
     }
 
     public void editCustomer() {
+        List<String> errors = editCustomerPage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(customerPage, errors);
+            return;
+        }
         boolean result = customerDAO.updateCustomer(editCustomerPage.getCurrentData());
         if (result) {
             JOptionPane.showMessageDialog(customerPage, "Successful");
@@ -67,6 +75,11 @@ public class CustomerController {
     }
 
     public void addCustomer() {
+        List<String> errors = editCustomerPage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(customerPage, errors);
+            return;
+        }
         int row = customerDAO.addCustomer(editCustomerPage.getCurrentData());
         if (row > 0) {
             JOptionPane.showMessageDialog(customerPage, "Successful");

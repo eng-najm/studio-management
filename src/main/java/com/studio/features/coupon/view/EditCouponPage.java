@@ -1,17 +1,18 @@
 package com.studio.features.coupon.view;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import java.awt.*;
+import java.sql.Timestamp;
 
+import com.studio.core.FieldValidator;
+import com.studio.core.constants.ValidationType;
 import com.studio.core.shared_widgets.AppButton;
 import com.studio.core.shared_widgets.AppFiled;
 import com.studio.core.shared_widgets.AppLable;
@@ -96,6 +97,28 @@ public class EditCouponPage extends JPanel {
                 : Timestamp.valueOf(endAtField.getText());
 
         return new CouponModel(id, discountPercent, code, status, note, startAt, endAt);
+    }
+
+    public List<String> validateFields() {
+        List<String> errors = new ArrayList<>();
+        addError(errors, FieldValidator.validate("Code", codeField.getText(), ValidationType.REQUIRED));
+        addError(errors,
+                FieldValidator.validate("Discount Percent", discountPercentField.getText(), ValidationType.REQUIRED));
+        addError(errors,
+                FieldValidator.validate("Discount Percent", discountPercentField.getText(), ValidationType.DECIMAL));
+        addError(errors, FieldValidator.validate("Status", statusField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Status", statusField.getText(), ValidationType.INTEGER));
+        addError(errors, FieldValidator.validate("Start At", startAtField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Start At", startAtField.getText(), ValidationType.TIMESTAMP));
+        addError(errors, FieldValidator.validate("End At", endAtField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("End At", endAtField.getText(), ValidationType.TIMESTAMP));
+        return errors;
+    }
+
+    private void addError(List<String> errors, String error) {
+        if (error != null) {
+            errors.add(error);
+        }
     }
 
     public AppButton getApplyChangeButton() {

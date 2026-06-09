@@ -1,10 +1,6 @@
 package com.studio.features.payment.view;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -14,7 +10,11 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import java.awt.*;
+import java.sql.Timestamp;
 
+import com.studio.core.FieldValidator;
+import com.studio.core.constants.ValidationType;
 import com.studio.core.model.ComboItem;
 import com.studio.core.shared_widgets.AppButton;
 import com.studio.core.shared_widgets.AppFiled;
@@ -137,6 +137,27 @@ public class EditPaymentPage extends JPanel {
         return new PaymentModel(paymentNumber, invoiceId, amount, method, referenceNo, paymentAt);
     }
 
+    public List<String> validateFields() {
+        List<String> errors = new ArrayList<>();
+        addError(errors,
+                FieldValidator.validate("Payment Number", paymentNumberField.getText(), ValidationType.REQUIRED));
+        addError(errors,
+                FieldValidator.validate("Payment Number", paymentNumberField.getText(), ValidationType.INTEGER));
+        addError(errors, FieldValidator.validateComboRequired("Invoice", invoiceCombo));
+        addError(errors, FieldValidator.validate("Amount", amountField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Amount", amountField.getText(), ValidationType.DECIMAL));
+        addError(errors, FieldValidator.validate("Method", methodField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Payment At", paymentAtField.getText(), ValidationType.REQUIRED));
+        addError(errors, FieldValidator.validate("Payment At", paymentAtField.getText(), ValidationType.TIMESTAMP));
+        return errors;
+    }
+
+    private void addError(List<String> errors, String error) {
+        if (error != null) {
+            errors.add(error);
+        }
+    }
+
     public void setAdd(boolean isAdd) {
         if (isAdd) {
             paymentNumberField.setText("");
@@ -156,8 +177,19 @@ public class EditPaymentPage extends JPanel {
         }
     }
 
-    public AppButton getApplyChangeButton() { return applyChangeButton; }
-    public AppButton getAddButton() { return addButton; }
-    public AppButton getDeleteButton() { return deleteButton; }
-    public AppButton getBackButton() { return backButton; }
+    public AppButton getApplyChangeButton() {
+        return applyChangeButton;
+    }
+
+    public AppButton getAddButton() {
+        return addButton;
+    }
+
+    public AppButton getDeleteButton() {
+        return deleteButton;
+    }
+
+    public AppButton getBackButton() {
+        return backButton;
+    }
 }

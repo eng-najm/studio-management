@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import java.util.List;
+
 import com.studio.core.Either;
+import com.studio.core.FieldValidator;
 import com.studio.core.constants.AppRoutes;
 import com.studio.features.attendance.AttendanceDAO;
 import com.studio.features.attendance.model.AttendanceModel;
@@ -60,6 +63,11 @@ public class AttendanceController {
     }
 
     void addAttendance() {
+        List<String> errors = editAttendancePage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(attendancePage, errors);
+            return;
+        }
         AttendanceModel attendance = editAttendancePage.getCurrentData();
         int row = attendanceDAO.addAttendance(attendance);
         if (row > 0) {
@@ -72,6 +80,11 @@ public class AttendanceController {
     }
 
     void editAttendance() {
+        List<String> errors = editAttendancePage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(attendancePage, errors);
+            return;
+        }
         AttendanceModel attendance = editAttendancePage.getCurrentData();
         boolean result = attendanceDAO.updateAttendance(attendance);
         if (result) {

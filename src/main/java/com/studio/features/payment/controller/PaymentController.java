@@ -7,8 +7,11 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import java.util.List;
+
 import com.studio.core.ComboItemsProvider;
 import com.studio.core.Either;
+import com.studio.core.FieldValidator;
 import com.studio.core.constants.AppRoutes;
 import com.studio.features.dashboard.view.DashboardPage;
 import com.studio.features.payment.PaymentDAO;
@@ -62,6 +65,11 @@ public class PaymentController {
     }
 
     void addPayment() {
+        List<String> errors = editPaymentPage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(paymentPage, errors);
+            return;
+        }
         PaymentModel payment = editPaymentPage.getCurrentData();
         int result = paymentDAO.addPayment(payment);
         if (result > 0) {
@@ -74,6 +82,11 @@ public class PaymentController {
     }
 
     void editPayment() {
+        List<String> errors = editPaymentPage.validateFields();
+        if (!errors.isEmpty()) {
+            FieldValidator.showErrors(paymentPage, errors);
+            return;
+        }
         PaymentModel payment = editPaymentPage.getCurrentData();
         boolean result = paymentDAO.updatePayment(payment);
         if (result) {
